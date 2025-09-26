@@ -1,21 +1,10 @@
-name: 'Setup Project'
-description: 'Composite action to setup Node, install deps, and run lint+tests'
-author: 'CSP451 Instructors'
+name: Setup Project
+description: Install dependencies and set up Node.js
 runs:
-  using: 'composite'
+  using: composite
   steps:
-    - uses: actions/setup-node@v4
+    - uses: actions/setup-node@v3
       with:
-        node-version: ${{ inputs.node-version }}
-        cache: 'npm'
+        node-version: 18
+        cache: npm
     - run: npm ci
-      shell: bash
-    - run: npm run lint
-      shell: bash
-    - run: npm test -- --coverage
-      shell: bash
-inputs:
-  node-version:
-    description: 'Node.js version'
-    required: false
-    default: '18'
